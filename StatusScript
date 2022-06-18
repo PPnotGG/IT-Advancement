@@ -17,6 +17,7 @@ public class StatusScript : MonoBehaviour
     public bool compensate;
     public double eFactor, eAmmount, fAmmount;
     public GameObject finalScreen;
+    public bool triggerTablet;
 
 
     void Start()
@@ -24,7 +25,7 @@ public class StatusScript : MonoBehaviour
         failure1 = "0"; failure2 = "5"; failure3 = "10"; failure4 = "15";
         balance = "1000"; energy = "100";
         rnd = new System.Random(); chance = 0; age = 20; compensate = false;
-        eFactor = 1; eAmmount = 1; fAmmount = 0;
+        eFactor = 1; eAmmount = 1; fAmmount = 0; triggerTablet = false;
     }
 
     public void CheckChance()
@@ -84,28 +85,33 @@ public class StatusScript : MonoBehaviour
                 CalculateEnergy(10, 15);
                 CalculateFailureChance();
                 CalculateMoney(10, 30, failure1);
+                triggerTablet = true;
                 break;
 
             case 2:
                 CalculateEnergy(15, 20);
                 CalculateFailureChance();
                 CalculateMoney(25, 50, failure2);
+                triggerTablet = true;
                 break;
 
             case 3:
                 CalculateEnergy(20, 25);
                 CalculateFailureChance();
-                CalculateMoney(40, 75, failure3);
+                CalculateMoney(50, 90, failure3);
+                triggerTablet = true;
                 break;
 
             case 4:
                 CalculateEnergy(20, 30);
                 CalculateFailureChance();
-                CalculateMoney(50, 100, failure4);
+                CalculateMoney(75, 125, failure4);
+                triggerTablet = true;
                 break;
         }
         int circles = PlayerControls.circles;
         age = 20 + circles;
+
     }
 
     public void GetEnergy(Text text)
