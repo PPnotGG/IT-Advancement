@@ -10,14 +10,17 @@ public class FieldsScript : MonoBehaviour
     public GameObject red1, red2, red3;
     public GameObject green1, green2, green3;
     public GameObject yellow1, yellow2, yellow3;
-    public GameObject warning;
+    public GameObject warning, trigger, tablet;
     int yNum;
     System.Random rnd;
+    public Animator anim;
+    public bool animStarted;
+    public GameObject closeButton, openButton;
 
     void Start()
     {
-        yNum = 1;
-        rnd = new System.Random();
+        yNum = 1; animStarted = false;
+        rnd = new System.Random(); 
     }
 
     public void CheckField()
@@ -174,6 +177,17 @@ public class FieldsScript : MonoBehaviour
 
     void Update()
     {
-        
+        if (StatusScript.triggerTablet)
+        {
+            anim.Play("CloseTablet");
+            StatusScript.triggerTablet = false;
+            animStarted = true;
+        }
+        if (tablet.transform.position == trigger.transform.position && animStarted)
+        {
+            animStarted = false;
+            closeButton.SetActive(false);
+            openButton.SetActive(true);
+        }
     }
 }
